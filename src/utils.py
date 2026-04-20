@@ -1,0 +1,72 @@
+import os
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.metrics import confusion_matrix, classification_report, accuracy_score
+
+# create folder
+def create_output_dir():
+    os.makedirs("outputs", exist_ok=True)
+
+# ---------------- CONFUSION MATRIX ----------------
+def plot_confusion_matrix(y_true, y_pred, classes, title, filename):
+    cm = confusion_matrix(y_true, y_pred)
+
+    plt.figure(figsize=(12,10))
+    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
+                xticklabels=classes, yticklabels=classes)
+
+    plt.title(title)
+    plt.xlabel("Predicted")
+    plt.ylabel("Actual")
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+
+    path = os.path.join("outputs", filename)
+    plt.savefig(path)
+    plt.close()
+
+# ---------------- METRICS ----------------
+def print_metrics(y_true, y_pred, classes, model_name):
+    print(f"\n📊 {model_name} Results:")
+    print("Accuracy:", accuracy_score(y_true, y_pred))
+    print("\nClassification Report:\n",
+          classification_report(y_true, y_pred, target_names=classes))
+
+# ---------------- BAR GRAPH (MODEL COMPARISON) ----------------
+def plot_model_comparison(models, acc, sens, spec):
+    x = np.arange(len(models))
+    width = 0.25
+
+    plt.figure(figsize=(10,6))
+    plt.bar(x - width, acc, width, label='Accuracy')
+    plt.bar(x, sens, width, label='Sensitivity')
+    plt.bar(x + width, spec, width, label='Specificity')
+
+    plt.xticks(x, models)
+    plt.ylabel('Score')
+    plt.ylim(0, 1.05)
+    plt.title('Model Comparison')
+    plt.legend()
+    plt.grid(axis='y', linestyle='--', alpha=0.7)
+
+    plt.savefig("outputs/model_comparison.png")
+    plt.close()
+
+from sklearn.metrics import recall_score
+
+def overall_metrics(y_true, y_pred):
+    cm = confusion_matrix(y_true, y_pred)
+
+    acc = accuracy_score(y_true, y_pred)
+    sens = recall_score(y_true, y_pred, average='macro')
+
+    spec_list = []
+    for i in range(len(cm)):
+        tn = cm.sum() - (cm[i,:].sum() + cm[:,i].sum() - cm[i,i])
+        fp = cm[:,i].sum() - cm[i,i]
+        spec_list.append(tn / (tn + fp))
+
+    spec = np.mean(spec_list)
+
+    return acc, sens, spec
