@@ -1,131 +1,72 @@
-# Speech Emotion & Gender Detection System
+Project Overview
 
-## Project Overview
+This project detects human emotion and gender from speech audio using Machine Learning and Deep Learning techniques.
 
-This project is designed to detect **human emotion and gender from speech audio** using Machine Learning and Deep Learning techniques.
+It combines multiple models to improve performance:
 
-It uses:
-
-* Random Forest (ML Model)
-* LSTM (Deep Learning Model)
-* Stacking Ensemble Model
+Random Forest (ML Model)
+LSTM (Deep Learning Model)
+Stacking Ensemble Model
 
 The system predicts combined labels such as:
 
-* `happy_male`
-* `sad_female`
-* `angry_male`
-* `neutral_female`
+happy_male
+sad_female
+angry_male
+neutral_female
 
-## Project Structure
+# Technologies Used
+Python
+NumPy
+Librosa (Audio Processing)
+Scikit-learn
+TensorFlow / Keras
+Matplotlib & Seaborn
 
-Speech-Emotion-Detection/
-│
-├── src/
-│   ├── data_loader.py
-│   ├── augmentation.py
-│   ├── feature_extraction.py
-│   ├── train_rf.py
-│   ├── train_lstm.py
-│   └── stacking.py
-│
-├── main.py
-├── requirements.txt
-└── README.md
-```
+# Dataset
+Dataset: RAVDESS (Ryerson Audio-Visual Database of Emotional Speech and Song)
+Contains labeled emotional speech audio from multiple actors
 
----
+Download: http s://zenodo.org/record/1188976
 
-## ⚙️ Technologies Used
+# Workflow
+Load audio files
+Apply data augmentation
+Extract features (MFCC, etc.)
+Train models:
+Random Forest
+LSTM
+Combine predictions using stacking
+Evaluate results
 
-* Python
-* Librosa (Audio Processing)
-* NumPy
-* Scikit-learn
-* TensorFlow / Keras
-* Matplotlib & Seaborn
-
----
-
-## 📊 Dataset
-
-* Dataset used: **RAVDESS (Ryerson Audio-Visual Database of Emotional Speech and Song)**
-* Contains emotional speech samples from multiple actors
-
-⚠️ Note:
-Dataset is not included due to large size.
-Download it separately and place inside your project folder.
-
----
-
-## 🚀 How to Run the Project
-
-### Step 1: Clone Repository
-
-```bash
-git clone https://github.com/your-username/speech-emotion-project.git
-cd speech-emotion-project
-```
-
-### Step 2: Install Dependencies
-
-```bash
+# How to Run
+1. Clone Repository
+git clone https://github.com/Raveena2611/VERG-Voice-based-Emotion-Recognition-for-Gender.git
+cd VERG-Voice-based-Emotion-Recognition-for-Gender
+2. Create Environment (Recommended)
+conda create -n verg_env python=3.10
+conda activate verg_env
+3. Install Dependencies
 pip install -r requirements.txt
-```
-
-### Step 3: Run Project
-
-```bash
+4. Run Project
 python main.py
-```
 
----
+## Model Details
 
-## 🧠 Model Details
+# Random Forest
+Uses extracted features like MFCC
+Fast training and good baseline performance
+# LSTM
+Learns sequential patterns from audio
+Better for capturing temporal dependencies
+# Stacking Ensemble
+Combines predictions from RF + LSTM
+Improves overall accuracy
 
-### 🔹 Random Forest
+# Output
+The project generates:
 
-* Uses statistical audio features (MFCC)
-* Fast and effective baseline model
-
-### 🔹 LSTM Model
-
-* Sequence-based learning
-* Captures temporal patterns in speech
-
-### 🔹 Stacking Model
-
-* Combines RF + LSTM predictions
-* Improves overall performance
-
----
-
-## 📈 Output
-
-* Emotion + Gender Prediction
-* Model Training Output
-* Accuracy Results
-
----
-
-## ⚠️ Important Notes
-
-* Make sure dataset path is correct in `main.py`
-* Use Python 3.8+ for compatibility
-* GPU recommended for faster LSTM training
-
----
-
-## 👩‍💻 Author
-
-**Raveena Rajak**
-
----
-
-## 📌 Future Improvements
-
-* Real-time voice prediction
-* Web deployment (Flask / FastAPI)
-* Improve accuracy with advanced models
-
----
+Accuracy score
+Classification report
+Confusion matrix
+Model comparison graph
