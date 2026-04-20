@@ -28,7 +28,7 @@ def plot_confusion_matrix(y_true, y_pred, classes, title, filename):
 
 # ---------------- METRICS ----------------
 def print_metrics(y_true, y_pred, classes, model_name):
-    print(f"\n📊 {model_name} Results:")
+    print(f"\n {model_name} Results:")
     print("Accuracy:", accuracy_score(y_true, y_pred))
     print("\nClassification Report:\n",
           classification_report(y_true, y_pred, target_names=classes))
