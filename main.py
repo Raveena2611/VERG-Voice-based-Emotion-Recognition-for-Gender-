@@ -14,7 +14,7 @@ from src.stacking import train_stacking, stacking_predict
 if __name__ == "__main__":
     print("Training Started")
 
-    DATASET_PATH = r"F:\MY study material\Data Analyst preparation\VERG\Ravdess\audio_speech_actors_01-24"
+    DATASET_PATH = r"F:\MY study material\VERG\RAVDESS\audio_speech_actors_01-24"
 
     files = load_files(DATASET_PATH)
 
